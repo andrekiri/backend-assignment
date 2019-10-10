@@ -1,0 +1,536 @@
+{
+	"info": {
+		"_postman_id": "1ea355be-de19-4d3b-87b0-e3f40942d27a",
+		"name": "vesselTrackerPostmanCollection",
+		"description": "All api calls for Vesseltracker REST API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Content-type not suported",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://vesseltracker/api/v1/track/1",
+					"protocol": "http",
+					"host": [
+						"vesseltracker"
+					],
+					"path": [
+						"api",
+						"v1",
+						"track",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get json track successfull",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://vesseltracker/api/v1/track/1",
+					"protocol": "http",
+					"host": [
+						"vesseltracker"
+					],
+					"path": [
+						"api",
+						"v1",
+						"track",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get xml track successfull",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://vesseltracker/api/v1/track/1",
+					"protocol": "http",
+					"host": [
+						"vesseltracker"
+					],
+					"path": [
+						"api",
+						"v1",
+						"track",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get csv track successfull",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/csv",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://vesseltracker/api/v1/track/1",
+					"protocol": "http",
+					"host": [
+						"vesseltracker"
+					],
+					"path": [
+						"api",
+						"v1",
+						"track",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get csv track invalid id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/csv",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://vesseltracker/api/v1/track/1.2",
+					"protocol": "http",
+					"host": [
+						"vesseltracker"
+					],
+					"path": [
+						"api",
+						"v1",
+						"track",
+						"1.2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get csv track id not found",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/csv",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://vesseltracker/api/v1/track/597566579",
+					"protocol": "http",
+					"host": [
+						"vesseltracker"
+					],
+					"path": [
+						"api",
+						"v1",
+						"track",
+						"597566579"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search tracks csv single mmsi",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/csv",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://vesseltracker/api/v1/tracks/search?mmsi=247039300&timestart=1372683959&timeend=1372683961",
+					"protocol": "http",
+					"host": [
+						"vesseltracker"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tracks",
+						"search"
+					],
+					"query": [
+						{
+							"key": "mmsi",
+							"value": "247039300"
+						},
+						{
+							"key": "timestart",
+							"value": "1372683959"
+						},
+						{
+							"key": "timeend",
+							"value": "1372683961"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search all tracks no filter xml",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://vesseltracker/api/v1/tracks/search",
+					"protocol": "http",
+					"host": [
+						"vesseltracker"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tracks",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search tracks multiple mmsi json",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://vesseltracker/api/v1/tracks/search?mmsi[]=247039300&mmsi[]=311486000",
+					"protocol": "http",
+					"host": [
+						"vesseltracker"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tracks",
+						"search"
+					],
+					"query": [
+						{
+							"key": "mmsi[]",
+							"value": "247039300"
+						},
+						{
+							"key": "mmsi[]",
+							"value": "311486000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post track xml",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\"?>\r\n<root>\r\n        <mmsi>247039300</mmsi>\r\n        <status>0</status>\r\n        <stationId>81</stationId>\r\n        <speed>180</speed>\r\n        <lon>15.4415</lon>\r\n        <lat>42.7518</lat>\r\n        <course>144</course>\r\n        <heading>144</heading>\r\n        <rot/>\r\n        <timestamp>1372683960</timestamp>\r\n</root>"
+				},
+				"url": {
+					"raw": "http://vesseltracker/api/v1/track",
+					"protocol": "http",
+					"host": [
+						"vesseltracker"
+					],
+					"path": [
+						"api",
+						"v1",
+						"track"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post track json",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"mmsi\": 247039300,\r\n    \"status\": 0,\r\n    \"stationId\": 81,\r\n    \"speed\": 180,\r\n    \"lon\": 15.4415,\r\n    \"lat\": 42.7518,\r\n    \"course\": 144,\r\n    \"heading\": 144,\r\n    \"rot\": \"\",\r\n    \"timestamp\": 1372683960\r\n}"
+				},
+				"url": {
+					"raw": "http://vesseltracker/api/v1/track",
+					"protocol": "http",
+					"host": [
+						"vesseltracker"
+					],
+					"path": [
+						"api",
+						"v1",
+						"track"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put track json",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mmsi\": 247039300,\r\n    \"status\": 0,\r\n    \"stationId\": 81,\r\n    \"speed\": 180,\r\n    \"lon\": 15.4415,\r\n    \"lat\": 42.7518,\r\n    \"course\": 144,\r\n    \"heading\": 144,\r\n    \"rot\": \"\",\r\n    \"timestamp\": 1372683960\r\n}"
+				},
+				"url": {
+					"raw": "http://vesseltracker/api/v1/track/1",
+					"protocol": "http",
+					"host": [
+						"vesseltracker"
+					],
+					"path": [
+						"api",
+						"v1",
+						"track",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put track xml",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\"?>\r\n<root>\r\n        <mmsi>247039300</mmsi>\r\n        <status>0</status>\r\n        <stationId>81</stationId>\r\n        <speed>187</speed>\r\n        <lon>15.4415</lon>\r\n        <lat>42.7518</lat>\r\n        <course>144</course>\r\n        <heading>144</heading>\r\n        <rot/>\r\n        <timestamp>1372683960</timestamp>\r\n</root>"
+				},
+				"url": {
+					"raw": "http://vesseltracker/api/v1/track/1",
+					"protocol": "http",
+					"host": [
+						"vesseltracker"
+					],
+					"path": [
+						"api",
+						"v1",
+						"track",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post csv track",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/csv",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "id,mmsi,status,stationId,speed,lon,lat,course,heading,rot,timestamp\n1,247039300,0,81,187,15.4415,42.7518,144,144,,1372683960"
+				},
+				"url": {
+					"raw": "http://vesseltracker/api/v1/track",
+					"protocol": "http",
+					"host": [
+						"vesseltracker"
+					],
+					"path": [
+						"api",
+						"v1",
+						"track"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put csv track",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/csv",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "mmsi,status,stationId,speed,lon,lat,course,heading,rot,timestamp\n247039300,0,81,187,15.4415,42.7518,144,147,,1372683960"
+				},
+				"url": {
+					"raw": "http://vesseltracker/api/v1/track/1",
+					"protocol": "http",
+					"host": [
+						"vesseltracker"
+					],
+					"path": [
+						"api",
+						"v1",
+						"track",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delet json track successfull",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://vesseltracker/api/v1/track/555",
+					"protocol": "http",
+					"host": [
+						"vesseltracker"
+					],
+					"path": [
+						"api",
+						"v1",
+						"track",
+						"555"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete csv track successfull",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/csv",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://vesseltracker/api/v1/track/554",
+					"protocol": "http",
+					"host": [
+						"vesseltracker"
+					],
+					"path": [
+						"api",
+						"v1",
+						"track",
+						"554"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete xml track successfull",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://vesseltracker/api/v1/track/1",
+					"protocol": "http",
+					"host": [
+						"vesseltracker"
+					],
+					"path": [
+						"api",
+						"v1",
+						"track",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

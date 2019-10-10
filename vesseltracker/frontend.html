@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta mmsi="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vessel Tracker</title>
+    <link type="text/css" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet">
+
+    <!--  jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--  Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.js"></script>
+    <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/2.5.1/jquery-confirm.min.css" rel="stylesheet" />
+
+    <!--  DataTables -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/select/1.2.3/js/dataTables.select.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.3/css/select.bootstrap.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+    <script src="./frontend.js"></script>
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="panel panel-default" style="display:inline-block;width:100%;height:300px">
+            <div class="panel-heading">
+                <b>Filters</b>
+            </div>
+            <div class="panel-body" style="margin-top:5px">
+                <div class="row" style="padding-left:30px">
+                    <table>
+                        <colgroup>
+                            <col style="width: 280px;" />
+                            <col style="width: 175px;" />
+                            <col style="width: 200px;" />
+                        </colgroup>
+                        <tr>
+                            <td style="width: 30%;">
+                                <input style="width: 90%;text-align:center" id="mmsifilter" />
+                            </td>
+                            <td style="width:14%">
+                                mmsi (single integer value or multiple comma seperated)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;">
+                                <input style="width: 90%;text-align:center" id="lonstartfilter" />
+                            </td>
+                            <td style="width:14%">
+                                lonstart
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;">
+                                <input style="width: 90%;text-align:center" id="lonendfilter" />
+                            </td>
+                            <td style="width:14%">
+                                lonend
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;">
+                                <input style="width: 90%;text-align:center" id="latstartfilter" />
+                            </td>
+                            <td style="width:14%">
+                                latstart
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;">
+                                <input style="width: 90%;text-align:center" id="latendfilter" />
+                            </td>
+                            <td style="width:14%">
+                                latend
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;">
+                                <input style="width: 90%;text-align:center" id="timestartfilter" />
+                            </td>
+                            <td style="width:14%">
+                                timestart
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;">
+                                <input style="width: 90%;text-align:center" id="timeendfilter" />
+                            </td>
+                            <td style="width:14%">
+                                timeend
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="button" class="btn btn-primary" id="refreshButton" style="margin: 5px 0px;padding: 4px 8px;">Refresh</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <table style="width:100%">
+            <tr>
+                <td>
+                    <input type="button" class="btn btn-primary" id="create_button" value="New">
+                    <input type="button" class="btn btn-primary" id="edit_button" value="Edit">
+                    <input type="button" class="btn btn-primary" id="delete_button" value="Delete">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <label>Availabe Tracks</label>
+                            <i id="spinner" class="fa fa-spinner fa-spin" style="display:none;font-size: 15px;"></i>
+                            <input style="float:right" type="text" id="datatablesSearchBox" placeholder="search table">
+                        </div>
+                        <div class="panel-body">
+                            <div id="errormessage"></div>
+                            <div class="table-responsive" id="tracktable-responsive">
+                                <!--javascript will place the table here-->
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div id="create_Track" class="modal" style="overflow-y: auto;">
+            <!-- Modal content -->
+            <div class="panel panel-default" style="margin: auto;width: 80%;">
+                <div class="panel-heading">
+                    <h4>Add new Track</h4>
+                </div>
+                <div class="panel-body">
+                    <form data-toggle="validator" role="form" id="trackRegistation">
+                        <div class="form-track">
+                            <label class="control-label" for="trackmmsi">Track mmsi</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track mmsi." id="trackmmsi" placeholder="track mmsi" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <label class="control-label" for="trackstatus">Track status</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track status." id="trackstatus" placeholder="track status" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <label class="control-label" for="trackstationId">Track stationId</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track stationId." id="trackstationId" placeholder="track stationId" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <label class="control-label" for="trackspeed">Track speed</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track speed." id="trackspeed" placeholder="track speed" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <label class="control-label" for="tracklon">Track lon</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track lon." id="tracklon" placeholder="track lon" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <label class="control-label" for="tracklat">Track lat</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track lat." id="tracklat" placeholder="track lat" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <label class="control-label" for="trackcourse">Track course</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track course." id="trackcourse" placeholder="track course" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <label class="control-label" for="trackheading">Track heading</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track heading." id="trackheading" placeholder="track heading" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <label class="control-label" for="trackrot">Track rot</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track rot." id="trackrot" placeholder="track rot" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <label class="control-label" for="tracktimestamp">Track timestamp</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track timestamp." id="tracktimestamp" placeholder="track timestamp" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <button class="btn btn-primary" type="submit" id="submitNewTrackButton">Submit</button>
+                            <button class="btn btn-primary" type="button" id="closeNewTrackButton" style="float:right">Cancel</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div id="update_Track" class="modal" style="overflow-y: auto;">
+            <div class="panel panel-default" style="margin: auto;width: 80%;">
+                <div class="panel-heading">
+                    <h4>Edit Track</h4>
+                </div>
+                <div class="panel-body">
+                    <form data-toggle="validator" role="form" id="editTrackForm">
+
+                        <div class="form-track">
+                            <label class="control-label" for="edittrackmmsi">Track mmsi</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track mmsi." id="edittrackmmsi" placeholder="track mmsi" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <label class="control-label" for="edittrackstatus">Track status</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track status." id="edittrackstatus" placeholder="track status" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <label class="control-label" for="edittrackstationId">Track stationId</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track stationId." id="edittrackstationId" placeholder="track stationId" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <label class="control-label" for="edittrackspeed">Track speed</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track speed." id="edittrackspeed" placeholder="track speed" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <label class="control-label" for="edittracklon">Track lon</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track lon." id="edittracklon" placeholder="track lon" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <label class="control-label" for="edittracklat">Track lat</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track lat." id="edittracklat" placeholder="track lat" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <label class="control-label" for="edittrackcourse">Track course</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track course." id="edittrackcourse" placeholder="track course" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <label class="control-label" for="edittrackheading">Track heading</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track heading." id="edittrackheading" placeholder="track heading" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <label class="control-label" for="edittrackrot">Track rot</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track rot." id="edittrackrot" placeholder="track rot" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-track">
+                            <label class="control-label" for="edittracktimestamp">Track timestamp</label><span style="color:red">*</span>
+                            <input class="form-control" data-error="Please enter Track timestamp." id="edittracktimestamp" placeholder="track timestamp" type="text" required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+
+                        <div class="form-track">
+                            <button class="btn btn-primary" type="submit" id="submiteditTrackButton">Submit</button>
+                            <button class="btn btn-primary" type="button" id="closeEditTrackButton" style="float:right">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
