@@ -6,11 +6,12 @@ function sendHTTP(method, url, data, actionOn200OK, actionOnError, isAsynchronou
     if (xhr.readyState === 4) {
       
       if ((xhr.status === 200) || (xhr.status === 201)) {
-        actionOn200OK(JSON.parse(xhr.response));
+        actionOn200OK(xhr.response);
       }
       else {
         console.log((xhr.responseText));
         actionOnError(xhr.responseText);
+        $('#spinner').hide();
       }
     }
   };
@@ -18,7 +19,6 @@ function sendHTTP(method, url, data, actionOn200OK, actionOnError, isAsynchronou
     xhr.send();
   }
   else {
-    console.log(JSON.stringify(data))
     xhr.send(JSON.stringify(data));
   }
 }
@@ -272,12 +272,11 @@ class trackPageManager {
   }
   onGetAllTrackResp(jsonResponse) {
     var self = this;
-    self.tracks = {};
-    var tracks = jsonResponse;
+    var tracks = JSON.parse(jsonResponse);
     document.getElementById("errormessage").innerHTML = "";
     document.getElementById("tracktable-responsive").innerHTML = '<table class="table table-striped table-bordered table-hover" id="listTrackTable"></table>';
     var guiData = [];
-    if (Array.isArray(jsonResponse)) {
+    if (Array.isArray(tracks)) {
       tableGenerator_buildHtmlTable("listTrackTable", tracks);
       self.oTable = tebleOptions("listTrackTable", "datatablesSearchBox");
     }
@@ -401,7 +400,6 @@ class trackPageManager {
     self.submitDeleteTrack();
   }
   closePopUpWindowCreate() {
-    console.log("asgasg");
     var modal = document.getElementById('create_Track');
     modal.style.display = "none";
   }
